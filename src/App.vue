@@ -2,8 +2,8 @@
 
   <div class="todo-container">
     <div class="todo-wrap">
-      <Header></Header>
-      <List></List>
+      <Header :addTodo="addTodo"></Header>
+      <List :todos="todos"></List>
       <Footer></Footer>
     </div>
   </div>
@@ -15,6 +15,22 @@
   import Footer from './components/Footer.vue'
 
   export default {
+    data () {
+      return {
+        todos: [
+          {id: 1, title: 'AAA', complete: false},
+          {id: 3, title: 'BBB', complete: true},
+          {id: 5, title: 'CCC', complete: false},
+        ]
+      }
+    },
+
+    methods: {
+      addTodo (todo) {
+        this.todos.unshift(todo)
+      }
+    },
+
     components: {
       Header,
       List,

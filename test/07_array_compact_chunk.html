@@ -36,10 +36,41 @@
 
   <script>
 
+    Array.prototype.compact = function () {
+      return this.filter(value => value)
+    }
+
+    Array.prototype.chunk = function (size) {
+      // 原数组的长度
+      const length = this.length
+      if (length===0) {
+        return []
+      }
+      if (size>length) {
+        size = length
+      }
+
+      // 一旦没有指定size, 小数组的长度就是1
+      size = size || 1
+      // 结果数组的长度
+      const resultLength = Math.ceil(length/size)
+      // 创建一个结果数组
+      const resultArr = new Array(resultLength) // (length + size -1) / size
+      let index = 0
+      let start = 0
+      while(index<resultLength) {
+        resultArr[index++] = this.slice(start, start += size)
+        // start += size
+      }
+
+      return resultArr
+    }
+
     console.log([0, 1, false, true, '', 'abc'].compact()) // [1, true, 'abc']
 
     console.log([1, 2, 3, 4, 5, 6, 7].chunk(3)) // [[1,2,3], [4,5,6],[7]]
     console.log([1, 2, 3, 4, 5, 6, 7].chunk())// [[1],[2],[3],[4],[5],[6],[7]]
+    console.log([1, 2, 3, 4, 5, 6, 7].chunk(10))// [1, 2, 3, 4, 5, 6, 7]
   </script>
 </body>
 </html>
