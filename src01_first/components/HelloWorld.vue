@@ -6,6 +6,8 @@
 
 <script type="text/ecmascript-6">
   export default {
+    name: 'HelloWorld',
+
     data () {
       return {
         title: 'HelloWorld 组件'

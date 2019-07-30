@@ -1,23 +1,36 @@
 <template>
-  <div>
-    <h1>App</h1>
-    <img src="./assets/logo.png" alt="logo">
-    <HelloWorld />
-    <hello-world />
+
+  <div class="todo-container">
+    <div class="todo-wrap">
+      <Header></Header>
+      <List></List>
+      <Footer></Footer>
+    </div>
   </div>
 </template>
-<script>
-  import HelloWorld from './components/HelloWorld'
+
+<script type="text/ecmascript-6">
+  import Header from './components/Header.vue'
+  import List from './components/List.vue'
+  import Footer from './components/Footer.vue'
+
   export default {
-    name: 'App',
     components: {
-      HelloWorld
+      Header,
+      List,
+      Footer
     }
   }
 </script>
-<style>
-  img {
-    width: 200px;
-    height: 200px;
+
+<style scoped>
+  .todo-container {
+    width: 600px;
+    margin: 0 auto;
+  }
+  .todo-container .todo-wrap {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
   }
 </style>
