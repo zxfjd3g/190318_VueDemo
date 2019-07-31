@@ -14,7 +14,7 @@
     props: ['todos', 'deleteTodo', 'updateTodo'],
 
     components: {
-      Item
+      // Item
     }
   }
 </script>
