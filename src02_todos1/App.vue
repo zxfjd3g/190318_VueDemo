@@ -2,16 +2,14 @@
 
   <div class="todo-container">
     <div class="todo-wrap">
-      <!-- <Header @addTodo="addTodo"></Header> -->
-      <Header ref="header"></Header>
-      <List :todos="todos"></List>
+      <Header :addTodo="addTodo"></Header>
+      <List :todos="todos" :deleteTodo="deleteTodo" :updateTodo="updateTodo"></List>
       <Footer :todos="todos" :selectAll="selectAll" :deleteCompleted="deleteCompleted"></Footer>
     </div>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-  import PubSub from 'pubsub-js'
   import Header from './components/Header.vue'
   import List from './components/List.vue'
   import Footer from './components/Footer.vue'
@@ -21,22 +19,6 @@
       return {
         todos: JSON.parse(localStorage.getItem('todos_key') || '[]')
       }
-    },
-
-    mounted () {
-      this.$refs.header.$on('addTodo', this.addTodo)
-      // 通过事件总线来绑定自定义事件监听
-      this.$globalEventBus.$on('deleteTodo', this.deleteTodo)
-      // 订阅消息
-      this.token = PubSub.subscribe('updateTodo', (msg, {todo, complete}) => {
-        this.updateTodo(todo, complete)
-      })
-    },
-
-    beforeDestroy() {
-      this.$refs.header.$off('addTodo')
-      this.$globalEventBus.$off('deleteTodo')
-      PubSub.unsubscribe(this.token)
     },
 
     methods: {

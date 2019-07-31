@@ -7,6 +7,12 @@
 
 <script type="text/ecmascript-6">
   export default {
+    props: { // 属性名 / 属性值的类型 / 属性的必要性
+      addTodo: {
+        type: Function,
+        required: true
+      }
+    },
 
     data () {
       return {
@@ -29,9 +35,7 @@
         }
 
         // 向App的todos添加一个todo
-        // 分发自定义事件: addTodo
-        this.$emit('addTodo', todo)
-
+        this.addTodo(todo)
 
         // 清除输入
         // title = ''
