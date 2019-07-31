@@ -3,25 +3,14 @@
 */
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import About from '../pages/About.vue'
-import Home from '../pages/Home.vue'
+
+import routes from './routes'
 
 Vue.use(VueRouter)
 
 export default new VueRouter({
+
+  mode: 'history', // 去掉了路由路径上的#
   // 应用中所有的路由
-  routes: [
-    {
-      path: '/about',
-      component: About
-    },
-    {
-      path: '/home',
-      component: Home
-    },
-    {
-      path: '/',
-      redirect: '/about'
-    }
-  ]
+  routes,
 })
