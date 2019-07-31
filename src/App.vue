@@ -5,7 +5,14 @@
       <!-- <Header @addTodo="addTodo"></Header> -->
       <Header ref="header"></Header>
       <List :todos="todos"></List>
-      <Footer :todos="todos" :selectAll="selectAll" :deleteCompleted="deleteCompleted"></Footer>
+      <!-- <Footer :todos="todos" :selectAll="selectAll" :deleteCompleted="deleteCompleted"></Footer> -->
+      <Footer>
+        <!-- <span slot="middle">
+          <span>已完成{{completedCount}}</span> / 全部{{todos.length}}
+        </span>  -->
+        <input type="checkbox" v-model="checkAll" slot="left"/>
+        <button class="btn btn-danger" v-if="completedCount>0" @click="deleteCompleted" slot="right">清除已完成任务</button>
+      </Footer>
     </div>
   </div>
 </template>
@@ -31,6 +38,24 @@
       this.token = PubSub.subscribe('updateTodo', (msg, {todo, complete}) => {
         this.updateTodo(todo, complete)
       })
+    },
+
+    computed: {
+      completedCount () {
+        // console.log('completedCount()')
+        return this.todos.reduce((pre, todo) => pre + (todo.complete ? 1 : 0) , 0)
+      },
+
+      checkAll: {
+        get () {
+          // console.log('checkAll get()')
+          return this.todos.length === this.completedCount && this.completedCount>0
+        },
+
+        set (value) { // 用户点击checkbox时调用
+          this.selectAll(value)
+        }
+      }
     },
 
     beforeDestroy() {
