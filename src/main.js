@@ -1,19 +1,17 @@
 /*
 入口JS
 */
-import Vue from 'vue'
+import eventBus from './event-bus'
 
-import router from './router'
-import App from './App.vue'
+eventBus.on('add', (data) => console.log('add', data) )
+eventBus.on('add', (data) => console.log('add2', data) )
+eventBus.on('delete', (data) => console.log('delete', data) )
+
+// eventBus.off('delete')
+// eventBus.off()
+
+eventBus.dispatch('add', 'atguigu')
+eventBus.dispatch('delete', 'xxxx')
 
 
-/* eslint-disable no-new */
-new Vue({
-  el: '#app',
-  components: {
-    App
-  },
-  template: '<App />',
-  router // 配置路由器
-})
 
