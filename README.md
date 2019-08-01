@@ -115,7 +115,7 @@
         按需打包
 
 ## 9. vue-router
-    vue用来实现SPA的插件
+    vue用来实现SPA的vue插件
     使用vue-router
         1. 创建路由器: router/index.js
           new VueRouter({
@@ -136,6 +136,7 @@
            	new Vue({
            		router
            	})
+            Vue.component('router-link', RouterLink)
         3. 使用路由组件标签:
            	<router-link to="/xxx">Go to XXX</router-link>
            	<router-view></router-view>
