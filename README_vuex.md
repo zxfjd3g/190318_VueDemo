@@ -76,10 +76,10 @@
 ## 3). 组件中通过store与vuex通信
 	import {mapState, mapGetters} from 'vuex'
 	export default {
-		computed: (
-			...mapState(['xxx']),
+		computed: {
+      ...mapState(['xxx']),
 			...mapGetters(['yyy'])
-		)
+    }
 		methods: {
 	        test () {
 	            this.$store.dispatch('zzz', data)
