@@ -10,7 +10,8 @@ Vue.use(Vuex)
 包含n个状态数据的对象
 */
 const state = {
-  count: 1
+  count: 1,
+  xxx: true
 }
 
 /* 
@@ -32,13 +33,14 @@ const mutations = {
 包含n个用来间接更新状态数据的方法对象
 */
 const actions = {
+  /* 
   increment(context) {
     context.commit('INCREMENT')
   },
 
   decrement (context) {
     context.commit('DECREMENT')
-  },
+  }, */
 
   incrementIfOdd ({commit, state}) {
     if (state.count%2===1) {
