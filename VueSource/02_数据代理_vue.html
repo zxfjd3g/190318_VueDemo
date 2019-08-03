@@ -6,6 +6,20 @@
 </head>
 <body>
 
+  <div id="test"></div>
+  <script src="./js/vue.js"></script>
+  <script>
+    const vm = new Vue({
+      el: '#test',
+      data: {
+        name: 'feifei'
+      }
+    })
+    console.log(vm)
+    console.log(vm.name) // feifei    vm代理了对data中的数据的读操作
 
+    vm.name = 'minming'
+    console.log(vm._data.name) // mingming  vm代理了对data中数据的写操作
+  </script>
 </body>
 </html>

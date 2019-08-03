@@ -80,6 +80,37 @@
   console.log(p.hasOwnProperty('fullName'), p.hasOwnProperty('toString')) // true false
 
   // 6. DocumentFragment: 文档碎片(高效批量更新多个节点)
+  // DocumentFragment: 只存在于内存的用于保存多个节点的容器节点
+  /* 
+  <div id="demo">
+    <ul>
+      <li>test1</li>
+      <li>test2</li>
+      <li>test3</li>
+    </ul>
+  </div>
+  */
+
+  // 1. 创建fragment容器对象
+  const fragment = document.createDocumentFragment()
+  // 2. 将div中所有的节点转移到fragment容器中
+  const div = document.getElementById('demo')
+  let child
+  while(child=div.firstChild) {
+    fragment.appendChild(child)// 将child节点从div中移除, 并添加为framgnet的子节点
+  }
+
+  // 3. 处理fragment中所有的li子节点
+  // children: 所有子元素的类数组
+  // childNodes: 所有子节点的类数组
+  const lis5 = fragment.children[0].children
+  ;[...lis5].forEach(li => {
+    li.textContent = 'atguigu' // 界面没有更新
+  })
+
+  // 4. 将fragment添加为div的子节点
+  div.appendChild(fragment) // 界面会进行批量更新
+
 </script>
 </body>
 </html>
