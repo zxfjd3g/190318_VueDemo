@@ -28,7 +28,58 @@
 -->
 
 <script type="text/javascript">
+  // 1. [].slice.call(lis): 将伪数组转换为真数组
+  const lis = document.getElementsByTagName('li') // 类数组
+  const lis2 = [...lis]
+  const lis3 = Array.from(lis)
+  const lis4 = Array.prototype.slice.call(lis) // lis.slice()
+  console.log(lis4 instanceof Array, lis4.forEach)
 
+  // 2. node.nodeType: 得到节点类型
+  /* <div id="test">尚硅谷IT教育</div> */
+  const elementNode = document.getElementById('test')
+  const attrNode = elementNode.getAttributeNode('id')
+  const textNode = elementNode.firstChild
+  console.log(elementNode.nodeType, attrNode.nodeType, textNode.nodeType)
+
+
+  // 3. Object.defineProperty(obj, propertyName, {}): 给对象添加属性(指定描述符)
+  const p = {
+    fistName: 'A',
+    lastName: 'B'
+  }
+  Object.defineProperty(p, 'fullName', { // 配置对象 ===> 属性描述符
+    // 数据描述符
+    // configurable: true/false 是否可以重新define
+    configurable: false, 
+    // enumerable: true/false 是否可以枚举(for..in / keys())
+    // enumerable: true,
+    // value: 指定初始值
+    // value: 'C-D'
+    // writable: true/false value是否可以修改
+    // writable: false,
+
+    // 访问描述符
+    get () {
+      return this.firstName + '-' + this.lastName
+    },
+
+    set (value) {
+      const names = value.split('-')
+      this.firstName = ''
+      this.lastName = ''
+    }
+  })
+
+  // 4. Object.keys(obj): 得到对象自身可枚举属性组成的数组
+  const keys = Object.keys(p)
+  console.log(keys) // p.toString
+
+
+  // 5. obj.hasOwnProperty(prop): 判断prop是否是obj自身的属性
+  console.log(p.hasOwnProperty('fullName'), p.hasOwnProperty('toString')) // true false
+
+  // 6. DocumentFragment: 文档碎片(高效批量更新多个节点)
 </script>
 </body>
 </html>
