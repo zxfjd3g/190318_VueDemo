@@ -61,22 +61,29 @@ Compile.prototype = {
     },
 
     compile: function(node) {
+        // 得到元素的所有属性节点
         var nodeAttrs = node.attributes,
             me = this;
 
+        // 遍历每个属性节点
         [].slice.call(nodeAttrs).forEach(function(attr) {
+            // 得到属性名: v-on:click
             var attrName = attr.name;
+            // 如果是指令属性
             if (me.isDirective(attrName)) {
+                // 得到属性值/表达式: test
                 var exp = attr.value;
+                // 从属性名截取出指令名: on:click
                 var dir = attrName.substring(2);
-                // 事件指令
+                // 如果是事件指令
                 if (me.isEventDirective(dir)) {
+                    // 解析事件指令
                     compileUtil.eventHandler(node, me.$vm, exp, dir);
-                    // 普通指令
+                // 如果是普通指令
                 } else {
                     compileUtil[dir] && compileUtil[dir](node, me.$vm, exp);
                 }
-
+                // 删除指令属性
                 node.removeAttribute(attrName);
             }
         });
@@ -157,12 +164,19 @@ var compileUtil = {
         });
     },
 
-    // 事件处理
+    /* 
+    解析事件指令
+    exp: 表达式   test
+    dir: 指令名   on:click
+    */
     eventHandler: function(node, vm, exp, dir) {
+        // 从指令名中截取事件名/类型: click
         var eventType = dir.split(':')[1],
+        // 根据表达式名从methods中取出对应的处理函数
             fn = vm.$options.methods && vm.$options.methods[exp];
-
+        // 如果都存在
         if (eventType && fn) {
+            // 给当前节点绑定指定事件名和回调函数的DOM事件监听: 函数的this被强制绑定为vm
             node.addEventListener(eventType, fn.bind(vm), false);
         }
     },
@@ -207,11 +221,7 @@ var updater = {
     /* 更新节点的className属性 */
     classUpdater: function(node, value, oldValue) {
         var className = node.className;
-        className = className.replace(oldValue, '').replace(/\s$/, '');
-
-        var space = className && String(value) ? ' ' : '';
-
-        node.className = className + space + value;
+        node.className = className ? className + ' ' + value : value
     },
 
     /* 更新节点的value属性 */

@@ -3,8 +3,39 @@
 <head>
   <meta charset="UTF-8">
   <title>05_模板解析_一般指令</title>
+  <style>
+    .aClass {
+      color: red;
+    }
+    .bClass {
+      font-size: 30px;
+    }
+  </style>
 </head>
 <body>
+  <div id="test">
+    <p v-text="cotnent"></p>
+    <p v-html="cotnent"></p>
+    <p class="bClass" v-class="myClass">atguigu.com</p>
+  </div>
 
+  <script src="./js/mvvm/compile.js"></script>
+  <script src="./js/mvvm/mvvm.js"></script>
+  <script src="./js/mvvm/observer.js"></script>
+  <script src="./js/mvvm/watcher.js"></script>
+  <script>
+    new MVVM({
+      el: '#test',
+      data: {
+        cotnent: '<a href="http://www.atguigu.com">atguigu</a>',
+        myClass: 'aClass'
+      },
+      methods: {
+        test() {
+          alert('响应点击, name=' + this.name)
+        }
+      }
+    })
+  </script>
 </body>
 </html>
