@@ -11,9 +11,8 @@
 
    <div id="test">
      <p>{{name}}</p>
-     <p>{{name}}</p>
-     <p>{{name}}</p>
      <p v-text="name"></p>
+     <p v-text="wife.name"></p>
      <button v-on:click="update">更新</button>
    </div>
 
@@ -26,14 +25,16 @@
        el: '#test',
        data: {
          name: 'tom',
-         /* wife: {
+         wife: {
            name: 'Jerry',
            age: 18
-         } */
+         }
        },
        methods: {
          update() {
            this.name = 'jack'
+           this.wife.name = 'meimei'
+           this.wife.age = 19
          }
        }
      })

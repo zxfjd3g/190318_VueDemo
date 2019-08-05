@@ -159,7 +159,9 @@ var compileUtil = {
         // 执行更新节点的函数(初始化更新)
         updaterFn && updaterFn(node, this._getVMVal(vm, exp));
 
+        // 创建与模板中的表达式一一对应的watcher对象, 用于更新对应的节点
         new Watcher(vm, exp, function(value, oldValue) {
+            // 录对应的属性发生改变时, 此函数执行更新页面上对应的节点
             updaterFn && updaterFn(node, value, oldValue);
         });
     },
